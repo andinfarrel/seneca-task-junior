@@ -84,6 +84,7 @@ const QuizSelect: FC<{
       data-position={pos}
       className={clsx("select-container", {
         "select-container-col": shouldCol,
+        "cursor-none": disable
       })}
       onClick={toggleHandler}
     >

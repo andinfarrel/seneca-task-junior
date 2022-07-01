@@ -34,6 +34,7 @@ a {
   box-sizing: border-box;
 }
 
+
 .flex {
   display: flex;
 }
@@ -85,7 +86,14 @@ a {
   justify-content: flex-start;
   width: clamp(290px, 100%, 1080px);
   height: 3rem;
+}
+
+.select-container:hover {
   cursor: pointer;
+}
+
+.cursor-none:hover {
+  cursor: not-allowed;
 }
 
 .select-container-col {
