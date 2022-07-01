@@ -22,6 +22,10 @@ const quiz = {
       correctAnswer: "Mitochondria",
       options: ["Cellulose", "Mitochondria"]
     },
+    {
+      correctAnswer: "Three",
+      options: ["One", "Two", "Three"]
+    },
     // {
     //   correctAnswer: "A",
     //   options: ["A", "B", "C"]
@@ -30,7 +34,7 @@ const quiz = {
 }
 
 const Home: NextPage = () => {
-  return <div className="h-screen w-screen">
+  return <div className="min-h-screen w-screen">
     <Quiz title={quiz.title} quiz={quiz.quiz}/>
   </div>;
 };

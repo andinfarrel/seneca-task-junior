@@ -112,7 +112,7 @@ const QuizSelect: FC<{
         layout
         className={clsx("selected-bg", {
           "selected-bg-ext": isExtended && !shouldCol,
-          "selected-bg-col": shouldCol && !isExtended,
+          "selected-bg-col": shouldCol, 
           "selected-bg-ext-col": isExtended && shouldCol
         })}
       />
