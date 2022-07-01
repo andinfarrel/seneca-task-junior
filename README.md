@@ -21,6 +21,7 @@ yarn run dev
 # Tech
 
 - Project bootstrapped with Next.js, but implementation should work on any React.js framework.
+- Type encorcemenent: TypeScript
 - Plain CSS to keep it lean
 - Component driven development made possible using [Storybook](https://storybook.js.org/)
 - Animation is done by using [framer-motion](https://www.framer.com/motion/)
