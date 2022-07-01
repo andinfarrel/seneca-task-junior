@@ -57,5 +57,5 @@ import { Quiz } from "@/components/Quiz";
 
 /* code */
 
-<Quiz title="quiz" quiz={setsOfOptions}>
+<Quiz question="Hello World?" answers={setsOfOptions}>
 ```

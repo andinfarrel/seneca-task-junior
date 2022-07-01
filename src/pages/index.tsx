@@ -4,8 +4,8 @@ import Head from "next/head";
 import Image from "next/image";
 
 const quiz = {
-  title: "An  animal cell contains:",
-  quiz: [
+  question: "An  animal cell contains:",
+  answers: [
     {
       correctAnswer: "Ribosomes",
       options: ["Cell wall", "Ribosomes"]
@@ -35,7 +35,7 @@ const quiz = {
 
 const Home: NextPage = () => {
   return <div className="min-h-screen w-screen">
-    <Quiz title={quiz.title} quiz={quiz.quiz}/>
+    <Quiz question={quiz.question} answers={quiz.answers}/>
   </div>;
 };
 

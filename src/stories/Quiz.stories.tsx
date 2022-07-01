@@ -7,14 +7,14 @@ export default {
 } as ComponentMeta<typeof Quiz>
 
 const Template: ComponentStory<typeof Quiz> = (args) => 
-  <div className="min-h-screen w-screen flex flex-col items-center">
+  <div className="h-screen w-screen flex flex-col items-center">
     <Quiz {...args}/> 
   </div>
 
 export const AnimalCells = Template.bind({})
 AnimalCells.args = {
-  title: "An  animal cell contains:",
-  quiz: [
+  question: "An  animal cell contains:",
+  answers: [
     {
       correctAnswer: "Ribosomes",
       options: ["Cell wall", "Ribosomes"]

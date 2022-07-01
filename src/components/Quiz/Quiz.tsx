@@ -5,10 +5,10 @@ import { QuizSelectOptions, useQuizLogic } from "../../hooks/use-quiz-logic";
 import { useWindowSizes } from "@/hooks/use-window-sizes";
 
 const Quiz: FC<{
-  title: string;
-  quiz: QuizSelectOptions[];
-}> = ({ title, quiz }) => {
-  const { progress, answerChangeHandler, choicesList } = useQuizLogic(quiz);
+  question: string;
+  answers: QuizSelectOptions[];
+}> = ({ question, answers }) => {
+  const { progress, answerChangeHandler, choicesList } = useQuizLogic(answers);
   const success = progress === 1;
 
   const progressAsInt = Math.ceil(progress * 10);
@@ -22,7 +22,7 @@ const Quiz: FC<{
         "bg-gradient-blue": success,
       })}
     >
-      <p className="quiz-title">{title}</p>
+      <p className="quiz-title">{question}</p>
       <QuizSelects
         choicesList={choicesList}
         answerChangeHandler={answerChangeHandler}
