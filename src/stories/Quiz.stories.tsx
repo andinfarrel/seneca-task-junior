@@ -28,7 +28,7 @@ AnimalCells.args = {
       options: ["Cellulose", "Mitochondria"]
     },
     {
-      correctAnswer: "Example",
+      correctAnswer: "third",
       options: ["first", "second", "third"]
     }, 
   ]

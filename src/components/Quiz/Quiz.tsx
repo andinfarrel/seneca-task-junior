@@ -8,17 +8,29 @@ const Quiz: FC<{
   title: string;
   choices: QuizSelectOptions[];
 }> = ({ title, choices }) => {
-  const { success, answerChangeHandler, choicesList } = useQuizLogic(choices);
+  const { progress, answerChangeHandler, choicesList } = useQuizLogic(choices);
+  const success = progress === 1;
+
+  const progressAsInt = Math.ceil(progress * 10);
 
   return (
-    <div className={clsx("quiz-container font-bold bg-gradient-orange ", { "bg-gradient-blue" : success === 1})}>
+    <div
+      style={ !success ? {
+        background: `linear-gradient(hsla(${34 + progressAsInt * 2}, 89%, 69%, 1), hsla(${19 + progressAsInt * 2}, 80%, 55%, 1))`
+      } : {}}
+      className={clsx("quiz-container font-bold", {
+        "bg-gradient-blue": success,
+      })}
+    >
       <p className="quiz-title">{title}</p>
       <QuizSelects
         choicesList={choicesList}
         answerChangeHandler={answerChangeHandler}
-        disable={success === 1}
+        disable={success}
       />
-      <p className="quiz-subtitle">The answer is {success === 1 ? "correct" : "incorrect"}</p>
+      <p className="quiz-subtitle">
+        The answer is {success ? "correct" : "incorrect"}
+      </p>
     </div>
   );
 };
@@ -52,9 +64,10 @@ const QuizSelect: FC<{
   const windowSizes = useWindowSizes();
 
   const isExtended = options.length === 3;
-  const maxCharLength = Math.max(...options.map(option => option.length));
+  const maxCharLength = Math.max(...options.map((option) => option.length));
 
-  const shouldCol = windowSizes.width <= 320 && (isExtended || maxCharLength > 12);
+  const shouldCol =
+    windowSizes.width <= 320 && (isExtended || maxCharLength > 12);
   // console.log(`${selectOptions.correctAnswer}: ${shouldCol}`)
   const positions = !isExtended ? ["start", "end"] : ["start", "center", "end"];
   const pos = positions[posIdx];
@@ -69,20 +82,36 @@ const QuizSelect: FC<{
   return (
     <div
       data-position={pos}
-      className={clsx("select-container", { "select-container-col": shouldCol })}
+      className={clsx("select-container", {
+        "select-container-col": shouldCol,
+      })}
       onClick={toggleHandler}
     >
-      <div className={clsx("quiz-options-container", { "border-white": disable, "quiz-options-container-col": shouldCol })}>
+      <div
+        className={clsx("quiz-options-container", {
+          "border-white": disable,
+          "quiz-options-container-col": shouldCol,
+        })}
+      >
         {options.map((option, index) => (
           <p
             key={option}
-            className={clsx("quiz-option", { "text-gray": posIdx == index, "quiz-option-col": shouldCol })}
+            className={clsx("quiz-option", {
+              "text-gray": posIdx == index,
+              "quiz-option-col": shouldCol,
+            })}
           >
             {option}
           </p>
         ))}
       </div>
-      <motion.div layout className={clsx("selected-bg", {"selected-bg-ext": isExtended, "selected-bg-col": shouldCol})}/>
+      <motion.div
+        layout
+        className={clsx("selected-bg", {
+          "selected-bg-ext": isExtended,
+          "selected-bg-col": shouldCol,
+        })}
+      />
     </div>
   );
 };

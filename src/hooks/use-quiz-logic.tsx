@@ -36,21 +36,21 @@ export const useQuizLogic = (choices: QuizSelectOptions[]) => {
   };
 
   const [choicesList, setChoicesList] = useState(choices);
-  const [success, setSuccess] = useState(tallyAnswers(choices) / choices.length);
+  const [progress, setProgress] = useState(tallyAnswers(choices) / choices.length);
   
   useEffect(() => {
     const randomized = getRandomizedChoices();
     setChoicesList(randomized);
-    setSuccess(tallyAnswers(randomized) / choicesList.length)
+    setProgress(tallyAnswers(randomized) / choicesList.length)
   }, []);
 
   const answerChangeHandler = (index: number) => {
     return (answer: string) => {
-      if (success === 1) return;
+      if (progress === 1) return;
       setChoicesList((prev) => {
         const newList = prev;
         newList[index].selectedAnswer = answer;
-        setSuccess(tallyAnswers(newList) / choicesList.length)
+        setProgress(tallyAnswers(newList) / choicesList.length)
         return newList;
       });
     };
@@ -59,6 +59,6 @@ export const useQuizLogic = (choices: QuizSelectOptions[]) => {
   return {
     choicesList,
     answerChangeHandler,
-    success
+    progress
   }
 }
