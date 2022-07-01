@@ -41,6 +41,9 @@ yarn run dev
 ### Styling
 
 - Plain CSS
+- Layout of selector could be either only row or column
+- Extended (3 Options) border on column layout may be not rounded on all corners
+
 
 ## Limitations
 
