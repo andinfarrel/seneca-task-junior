@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export interface QuizSelectOptions {
   correctAnswer: string;
   options: string[];
-  selectedAnswer: string;
+  selectedAnswer?: string;
 }
 
 export const useQuizLogic = (choices: QuizSelectOptions[]) => {
