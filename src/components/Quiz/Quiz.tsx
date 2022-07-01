@@ -66,9 +66,8 @@ const QuizSelect: FC<{
   const isExtended = options.length === 3;
   const maxCharLength = Math.max(...options.map((option) => option.length));
 
-  const shouldCol =
-    windowSizes.width <= 720 && (isExtended || maxCharLength > 12);
-  // console.log(`${selectOptions.correctAnswer}: ${shouldCol}`)
+  const shouldCol = windowSizes ?
+    windowSizes.width <= 720 && (isExtended || maxCharLength > 12) : false;
   const positions = !isExtended ? ["start", "end"] : ["start", "center", "end"];
   const pos = positions[posIdx];
 
