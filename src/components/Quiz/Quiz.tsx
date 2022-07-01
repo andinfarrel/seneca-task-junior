@@ -6,9 +6,9 @@ import { useWindowSizes } from "@/hooks/use-window-sizes";
 
 const Quiz: FC<{
   title: string;
-  choices: QuizSelectOptions[];
-}> = ({ title, choices }) => {
-  const { progress, answerChangeHandler, choicesList } = useQuizLogic(choices);
+  quiz: QuizSelectOptions[];
+}> = ({ title, quiz }) => {
+  const { progress, answerChangeHandler, choicesList } = useQuizLogic(quiz);
   const success = progress === 1;
 
   const progressAsInt = Math.ceil(progress * 10);
@@ -67,7 +67,7 @@ const QuizSelect: FC<{
   const maxCharLength = Math.max(...options.map((option) => option.length));
 
   const shouldCol =
-    windowSizes.width <= 320 && (isExtended || maxCharLength > 12);
+    windowSizes.width <= 720 && (isExtended || maxCharLength > 12);
   // console.log(`${selectOptions.correctAnswer}: ${shouldCol}`)
   const positions = !isExtended ? ["start", "end"] : ["start", "center", "end"];
   const pos = positions[posIdx];
@@ -108,8 +108,9 @@ const QuizSelect: FC<{
       <motion.div
         layout
         className={clsx("selected-bg", {
-          "selected-bg-ext": isExtended,
-          "selected-bg-col": shouldCol,
+          "selected-bg-ext": isExtended && !shouldCol,
+          "selected-bg-col": shouldCol && !isExtended,
+          "selected-bg-ext-col": isExtended && shouldCol
         })}
       />
     </div>

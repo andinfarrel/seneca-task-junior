@@ -7,17 +7,21 @@ export default {
 } as ComponentMeta<typeof Quiz>
 
 const Template: ComponentStory<typeof Quiz> = (args) => 
-  <div className="h-screen w-screen flex flex-col items-center">
+  <div className="min-h-screen w-screen flex flex-col items-center">
     <Quiz {...args}/> 
   </div>
 
 export const AnimalCells = Template.bind({})
 AnimalCells.args = {
   title: "An  animal cell contains:",
-  choices: [
+  quiz: [
     {
       correctAnswer: "Ribosomes",
       options: ["Cell wall", "Ribosomes"]
+    },
+    {
+      correctAnswer: "Partially permeable membrane",
+      options: ["Partially permeable membrane", "Impermeable membrane"]
     },
     {
       correctAnswer: "Cytoplasm",
@@ -27,9 +31,9 @@ AnimalCells.args = {
       correctAnswer: "Mitochondria",
       options: ["Cellulose", "Mitochondria"]
     },
-    {
-      correctAnswer: "third",
-      options: ["first", "second", "third"]
-    }, 
+    // {
+    //   correctAnswer: "A",
+    //   options: ["A", "B", "C"]
+    // },
   ]
 }
