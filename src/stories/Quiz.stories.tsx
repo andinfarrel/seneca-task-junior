@@ -6,7 +6,10 @@ export default {
   component: Quiz
 } as ComponentMeta<typeof Quiz>
 
-const Template: ComponentStory<typeof Quiz> = (args) => <Quiz {...args}/>
+const Template: ComponentStory<typeof Quiz> = (args) => 
+  <div className="h-screen w-screen flex flex-col items-center">
+    <Quiz {...args}/> 
+  </div>
 
 export const AnimalCells = Template.bind({})
 AnimalCells.args = {
@@ -21,12 +24,12 @@ AnimalCells.args = {
       options: ["Cytoplasm", "Chloroplast"]
     },
     {
-      correctAnswer: "Partially permeable membrane",
-      options: ["Partially permeable membrane", "Impermeable membrane"]
-    },
-    {
       correctAnswer: "Mitochondria",
       options: ["Cellulose", "Mitochondria"]
     },
+    {
+      correctAnswer: "Example",
+      options: ["first", "second", "third"]
+    }, 
   ]
 }

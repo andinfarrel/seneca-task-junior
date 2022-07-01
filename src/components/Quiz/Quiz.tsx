@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { QuizSelectOptions, useQuizLogic } from "../../hooks/use-quiz-logic";
+import { useWindowSizes } from "@/hooks/use-window-sizes";
 
 const Quiz: FC<{
   title: string;
@@ -11,13 +12,13 @@ const Quiz: FC<{
 
   return (
     <div className={clsx("quiz-container font-bold bg-gradient-orange ", { "bg-gradient-blue" : success === 1})}>
-      <p>{title}</p>
+      <p className="quiz-title">{title}</p>
       <QuizSelects
         choicesList={choicesList}
         answerChangeHandler={answerChangeHandler}
         disable={success === 1}
       />
-      <p>The answer is {success === 1 ? "correct" : "incorrect"}</p>
+      <p className="quiz-subtitle">The answer is {success === 1 ? "correct" : "incorrect"}</p>
     </div>
   );
 };
@@ -48,9 +49,14 @@ const QuizSelect: FC<{
 }> = ({ selectOptions, selectAction, disable }) => {
   const { options, correctAnswer } = selectOptions;
   const [posIdx, setPosIdx] = useState(0);
+  const windowSizes = useWindowSizes();
 
+  const isExtended = options.length === 3;
+  const maxCharLength = Math.max(...options.map(option => option.length));
 
-  const positions = options.length === 2 ? ["start", "end"] : ["start", "center", "end"];
+  const shouldCol = windowSizes.width <= 320 && (isExtended || maxCharLength > 12);
+  // console.log(`${selectOptions.correctAnswer}: ${shouldCol}`)
+  const positions = !isExtended ? ["start", "end"] : ["start", "center", "end"];
   const pos = positions[posIdx];
 
   const toggleHandler = () => {
@@ -63,20 +69,20 @@ const QuizSelect: FC<{
   return (
     <div
       data-position={pos}
-      className="select-container"
+      className={clsx("select-container", { "select-container-col": shouldCol })}
       onClick={toggleHandler}
     >
-      <div className="quiz-options-container">
+      <div className={clsx("quiz-options-container", { "border-white": disable, "quiz-options-container-col": shouldCol })}>
         {options.map((option, index) => (
           <p
             key={option}
-            className={clsx("quiz-option", { "text-gray": posIdx == index })}
+            className={clsx("quiz-option", { "text-gray": posIdx == index, "quiz-option-col": shouldCol })}
           >
             {option}
           </p>
         ))}
       </div>
-      <motion.div layout className="selected-background" />
+      <motion.div layout className={clsx("selected-bg", {"selected-bg-ext": isExtended, "selected-bg-col": shouldCol})}/>
     </div>
   );
 };

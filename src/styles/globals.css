@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap');
+
 :root {
   --light-orange: #F6B868;
   --deep-orange: #EE6B2D;
@@ -10,8 +12,16 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Mulish', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.w-screen {
+  width: 100vw;
 }
 
 a {
@@ -31,6 +41,10 @@ a {
   flex-direction: column;
 }
 
+.items-center {
+  align-items: center;
+}
+
 .bg-gradient-orange {
   background: -webkit-gradient(var(--light-orange),var(--deep-orange));
   background: linear-gradient(var(--light-orange), var(--deep-orange));
@@ -48,22 +62,35 @@ a {
   height: 100%;
   display: flex;
   flex-direction: column;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 160%;
 }
 
-.quiz-container > p {
-  text-align: center;
+.quiz-title {
+  font-size: 20px;
   padding: 0.5rem;
 }
 
+.quiz-subtitle {
+  font-size: 16px;
+}
+
 .select-container {
-  margin: auto;
   position: relative;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: clamp(320px, 100%, 720px);
+  width: clamp(290px, 100%, 1080px);
   height: 3rem;
   cursor: pointer;
+}
+
+.select-container-col {
+  flex-direction: column;
+  position: relative;
+  height: 9rem;
 }
 
 .quiz-selects {
@@ -72,6 +99,9 @@ a {
   gap: 0.5rem;
 }
 
+.select-container[data-position="center"] {
+  justify-content: center;
+}
 
 .select-container[data-position="end"] {
   justify-content: flex-end;
@@ -82,14 +112,41 @@ a {
   position: absolute;
   display: flex;
   align-items: center;
-  width: clamp(320px, 100%, 720px);
+  width: clamp(290px, 100%, 1080px);
   height: 3rem;
-  border-radius: 50px;
-  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  border: 2px solid #F9D29F;
 }
 
+.quiz-options-container-col {
+  height: 9rem;
+  flex-direction: column;
+  border-radius: 24px;
+}
+
+
+.border-white {
+  border: 2px solid #ffffff;
+}
+
+
 .quiz-option {
+  text-align: center;
+  width: 100%;
   margin: auto;
+}
+
+@media screen and (min-width: 321px) {
+  .quiz-title {
+    font-size: 44px;
+    line-height: 140%;
+  } 
+  .quiz-option {
+    font-size: 24px;
+  }
+  .quiz-subtitle {
+    font-size: 32px;
+  }
 }
 
 .font-bold {
@@ -100,8 +157,7 @@ a {
   color: black;
 }
 
-
-.selected-background {
+.selected-bg {
   position: absolute;
   width: 50%;
   height: 3rem;
@@ -109,7 +165,11 @@ a {
   background-color: rgba(255, 255, 255, 0.6) ;
 }
 
-.h-a-third {
+.selected-bg-ext {
+  width: 33%;
+}
+
+.selected-bg-col {
   height: 33%;
   width: 100%;
 }
