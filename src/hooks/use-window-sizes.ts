@@ -6,11 +6,11 @@ const getWindowSizes = () => {
 };
 
 export const useWindowSizes = () => {
-  const [windowSizes, setWindowSizes] = useState(getWindowSizes());
+  const [windowSizes, setWindowSizes] = useState({width: 320, height: 631});
 
   useEffect(() => {
     const resizeHandler = () => {
-      setWindowSizes(getWindowSizes);
+      setWindowSizes(getWindowSizes());
     };
 
     window.addEventListener("resize", resizeHandler);
