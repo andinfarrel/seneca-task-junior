@@ -88,6 +88,7 @@ const QuizSelect: FC<{
       })}
       onClick={toggleHandler}
     >
+      {/* List of labels / options */}
       <div
         className={clsx("quiz-options-container", {
           "border-white": disable,
@@ -106,6 +107,7 @@ const QuizSelect: FC<{
           </p>
         ))}
       </div>
+      {/* This will act as a background for the components */}
       <motion.div
         layout
         className={clsx("selected-bg", {
