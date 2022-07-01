@@ -17,6 +17,10 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.min-h-screen {
+  height: 100vh;
+}
+
 .h-screen {
   height: 100vh;
 }
