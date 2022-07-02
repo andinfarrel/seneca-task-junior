@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
-import { QuizSelectOptions, useQuizLogic } from "../../hooks/use-quiz-logic";
+import { QuizSelectOptions, useQuizLogic } from "@/hooks/use-quiz-logic";
 import { useWindowSizes } from "@/hooks/use-window-sizes";
 
 const Quiz: FC<{
@@ -9,6 +9,7 @@ const Quiz: FC<{
   answers: QuizSelectOptions[];
 }> = ({ question, answers }) => {
   const { progress, answerChangeHandler, choicesList } = useQuizLogic(answers);
+
   const success = progress === 1;
 
   const progressAsInt = Math.ceil(progress * 10);

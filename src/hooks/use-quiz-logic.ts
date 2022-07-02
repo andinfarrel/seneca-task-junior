@@ -8,19 +8,18 @@ export interface QuizSelectOptions {
 }
 
 export const useQuizLogic = (choices: QuizSelectOptions[]) => {
-  const getRandomizedChoices = () =>
-    choices.map((choices) => {
-      const newOptions = choices.options;
-      choices.options.forEach((option) =>
+  const getRandomizedChoices = (arr: QuizSelectOptions[]) =>
+    arr.map((choice) => {
+      const newOptions = [...choice.options];
+      newOptions.forEach((option) =>
         swapItemInArray(
           newOptions,
           random(newOptions.length),
           random(newOptions.length)
         )
       );
-
       return {
-        correctAnswer: choices.correctAnswer,
+        correctAnswer: choice.correctAnswer,
         options: newOptions,
         selectedAnswer: newOptions[0],
       };
@@ -34,27 +33,31 @@ export const useQuizLogic = (choices: QuizSelectOptions[]) => {
     });
     return total;
   };
-
+  
   const [choicesList, setChoicesList] = useState(choices);
   const [progress, setProgress] = useState(tallyAnswers(choices) / choices.length);
-  
+
   useEffect(() => {
-    const randomized = getRandomizedChoices();
-    setChoicesList(randomized);
-    setProgress(tallyAnswers(randomized) / choicesList.length)
+    let hasBeenCalled = false;
+    if (!hasBeenCalled) {
+      const randomized = getRandomizedChoices(choicesList);
+      setChoicesList(randomized);
+      setProgress(tallyAnswers(randomized) / randomized.length);
+    }
+    return () => { hasBeenCalled = true };
   }, []);
 
   const answerChangeHandler = (index: number) => {
     return (answer: string) => {
       if (progress === 1) return;
-      setChoicesList((prev) => {
-        const newList = prev;
-        newList[index].selectedAnswer = answer;
-        setProgress(tallyAnswers(newList) / choicesList.length)
-        return newList;
-      });
+      const newList = choicesList;
+      newList[index].selectedAnswer = answer;
+      // batch update
+      setChoicesList(newList);
+      setProgress(tallyAnswers(newList) / newList.length);
     };
   }
+
 
   return {
     choicesList,
